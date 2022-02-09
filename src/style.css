@@ -266,7 +266,7 @@ box-shadow:
   inset 0 -0.05em 0 #c4c4c4;
   display: flex;
   justify-content: center;
-  align-elements: center;
+  align-content: center;
   position: relative;
   top:10px;
   transform: rotate(270deg);
@@ -316,7 +316,7 @@ box-shadow:
 }
 
 /*small screen used to display the adsr and gain values*/
-#schermo {
+.schermo {
   position: relative;
   width: 60px;
   height: 25px;
@@ -329,7 +329,7 @@ box-shadow:
   justify-content: center;
 }
 
-#schermo span {
+.schermo span {
   position: relative;
   font-family: Helvetica, sans-serif;
   font-weight: bold;
@@ -343,7 +343,7 @@ box-shadow:
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-elements: center;
+  align-content: center;
 }
 
 /*styling of the checkbox that allows you to choose between playing the realKeyboard or playing a pitch modulator (always thanks to the KeyBoard)*/
@@ -362,7 +362,7 @@ box-shadow:
   inset 0 -0.05em 0 #c4c4c4;
   display: flex;
   justify-content: center;
-  align-elements: center;
+  align-content: center;
   position: relative;
   font-size: 10px;
 }
@@ -654,7 +654,7 @@ box-shadow:
   inset 0 -0.05em 0 #c4c4c4;
   display: flex;
   justify-content: center;
-  align-elements: center;
+  align-content: center;
   position: relative;
   top:-1px;
 }
@@ -708,7 +708,7 @@ box-shadow:
   inset 0 -0.05em 0 #c4c4c4;
   display: flex;
   justify-content: center;
-  align-elements: center;
+  align-content: center;
   position: relative;
   top:45px;
   padding: 3px;
@@ -844,7 +844,7 @@ box-shadow:
   inset 0 -0.05em 0 #c4c4c4;
   display: flex;
   justify-content: center;
-  align-elements: center;
+  align-content: center;
   position: relative;
   font-size: 10px;
   top: -29px;
@@ -1023,7 +1023,6 @@ box-shadow:  -5px -5px 100px #2a0804,
 .filterSliders {
   position:relative;
   font-family: Helvetica, sans-serif;
-  font-color: white;
 }
 
 #Echos {
@@ -1037,7 +1036,6 @@ box-shadow:  -5px -5px 100px #2a0804,
 .EchoSliders {
   position:relative;
   font-family: Helvetica, sans-serif;
-  font-color: white;
 }
 
 #freqDifference {
@@ -1061,7 +1059,7 @@ box-shadow:
   inset 0 -0.05em 0 #c4c4c4;
   display: flex;
   justify-content: center;
-  align-elements: center;
+  align-content: center;
   position: relative;
   top:-1px;
 }
