@@ -1,0 +1,1103 @@
+/*
+genericName {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  background-color: #888
+}
+*/
+* {
+  box-sizing: border-box;
+  transition: 0.33s cubic-bezier(0.6, 0, 0.2, 1);
+}
+body {
+  background-color: lightgrey;
+  font-family: Helvetica, sans-serif;
+}
+.rela-inline {
+  display: inline-block;
+  position: relative;
+}
+.rela-block {
+  display: block;
+  position: relative;
+}
+p {
+  margin: 10px;
+}
+.toggle {
+  cursor: pointer;
+}
+.module {
+  font-family: Helvetica, sans-serif;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 4px;
+}
+.module::before {
+  z-index: -1;
+  position: absolute;
+  top: -34px;
+  left: -12px;
+  font-size: 44px;
+  letter-spacing: -2px;
+  opacity: 0.1;
+}
+/*.module.arp,
+.module.porta,
+.module.distortion {
+  margin-right: 80px;
+}*/
+.mod-container {
+  text-align: center;
+  margin: 0px 6px;
+}
+
+#root {
+  font-family: Helvetica, sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 39%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+}
+
+/*keyboard background style*/
+#synth {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 65vw;
+  height: 75vh;
+  background-color: #ccc;
+  box-shadow:  -5px -5px 10px #262626,
+             5px 5px 10px #9a9a9a;
+  border-radius: 5px;
+  background-image: url("https://www.windowo.it/data/prod/img/paros_maniglia_per_porta_su_rosetta_in_marmo_nero_marquina_made_in_italy_by_mandelli1953.jpg");
+}
+
+
+.half {
+  display: flex;
+  flex-direction: row;
+}
+.lower {
+  justify-content: space-between;
+}
+.upper {
+  justify-content: space-around;
+  align-items: center;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+}
+
+/*buttons that allow you to decide which wavetype will be played by the keyboard*/
+.waveSelection {
+  display: flex;
+  /*border-radius: 10px;*/
+  align-items:center;
+  justify-content: space-around;
+  width: 20vw;
+  height: 30vh;
+}
+
+/* display used to see the waveshape of whats being played by the keyboard*/
+#canvas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  justify-content: space-around;
+  border: 1px solid #000;
+  width: 30vw;
+  height: 12vh;
+  background-color: #fff;
+  transform: translateX(20vw);
+  box-shadow: inset -9px -9px 18px #000, inset 9px 9px 18px #000;
+  border-radius: 3px;
+  top: 1.5%;
+  left: -6%;
+}
+.waveform,
+
+.d-waveform {
+  width: 30px;
+  transition: 0s;
+  position: relative;
+  cursor:pointer;
+}
+.waveform *,
+.d-waveform * {
+  stroke: #aaa;
+  stroke-width: 6;
+  fill: none;
+}
+.waveform:hover *,
+.d-waveform:hover * {
+  stroke: #d6d6d6;
+}
+.waveform.active *,
+.d-waveform.active * {
+  stroke: #11a6f3;
+}
+
+/* styling of the keyboard's keys */
+#keyboard {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  position: relative;
+  width: 60vw;
+  height: 30vh;
+  background-color: #888;
+}
+.key {
+  height: 100px;
+  position: absolute;
+  border: solid 2px #000;
+  border-radius: 3px;
+  box-shadow:  -5px -5px 10px #262626,
+             5px 5px 10px #9a9a9a;
+}
+.white {
+/* width: 45%; */
+  height: 100%;
+  z-index: 1;
+  background-color: #fafafa;
+  box-shadow: 0px 1px 18px 0px;
+}
+.black {
+  width: 50px;
+  height: 70%;
+  z-index: 2;
+  background-color: #333;
+  box-shadow: 0px 1px 18px 0px;
+}
+#adsr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1em;
+  width: 43vw;
+  height: 28vh;
+}
+
+/*Styling of the envelope viewer*/
+#adsrGraph {
+  height: 98%;
+  width: 40%;
+  /*background-color: #FFFAF0;*/
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 7px;
+  border-color: #000000;
+  box-shadow: inset -9px -9px 18px #000, inset 9px 9px 18px #000;
+}
+
+/*styling of the adsr and gain sliders*/ 
+.inviluppi {
+  position:relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 45vw;
+  height: 30vh;
+  left: -30px;
+  cursor: pointer;
+}
+
+#adsrControls {
+  position:  relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  padding: 0 5px 5px 5px;
+  width: 60%;
+  height: 100%;
+  font-size: 20px;
+  left: 10px;
+}
+
+#adsrInputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 98%;
+  justify-content: space-evenly;
+  position:relative;
+  left: -10%; 
+}
+.adsrParameter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 30px;
+  height: 100%;
+}
+
+.SLD {
+  position: relative;
+  cursor: pointer;
+  align-items: center;
+  width: 4em;
+  height: 0.8em;;
+  border-radius: 1em;
+  background: linear-gradient(315deg, #838383, #9c9b9b);
+box-shadow:  
+  inset 0 0.05em 0 #616363,
+  inset 0 -0.05em 0 #c4c4c4;
+  display: flex;
+  justify-content: center;
+  align-elements: center;
+  position: relative;
+  top:10px;
+  transform: rotate(270deg);
+}
+
+.sliderTop {
+  appearance:none;
+  background: linear-gradient(
+    0deg,
+    #4d4d4d 0%,
+    #585858 50%,
+    #4d4d4d 100%
+  );
+  width: 14em;
+  height: 1em;
+  border: 0.05em #7e7e7e solid;
+  border-radius: 2em;
+  box-shadow: 
+    inset 0 0 0.5em #282828,
+    inset 0 0 0.1em #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.SLD .sliderTop::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  appearance: none;
+  width: 0.8em;
+  height: 0.8em;
+  background: linear-gradient(
+    0deg,
+    #dedede,
+    #5f5a5a
+  );
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 0.1em 0 #a9a9a9,
+    inset 0 -0.1em 0 #7f7f7f;
+}
+
+.adsrParameter span {
+  position: relative;
+  font-family: Helvetica, sans-serif;
+  color: white;
+  bottom: -20px;
+}
+
+/*small screen used to display the adsr and gain values*/
+#schermo {
+  position: relative;
+  width: 60px;
+  height: 25px;
+  border-radius: 3px;
+  box-shadow: inset -2px -2px 3px #000000,
+            inset 2px 2px 3px #000000;
+  top: -4px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+#schermo span {
+  position: relative;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  color: white;
+  text-shadow: #969696 0.05em 0.05em 0;
+  top: 4px;
+}
+
+.left-bar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-elements: center;
+}
+
+/*styling of the checkbox that allows you to choose between playing the realKeyboard or playing a pitch modulator (always thanks to the KeyBoard)*/
+.checkboxSelection {
+  position: relative;
+  left:2.5vh;
+  top:-7vh;
+  cursor: pointer;
+  align-items: center;
+  width: 6em;
+  height: 2.5em;
+  border-radius: 2em;
+  background: linear-gradient(315deg, #838383, #9c9b9b);
+box-shadow:  
+  inset 0 0.05em 0 #616363,
+  inset 0 -0.05em 0 #c4c4c4;
+  display: flex;
+  justify-content: center;
+  align-elements: center;
+  position: relative;
+  font-size: 10px;
+}
+
+.checkboxSelection input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.checkboxSelection .sliderSelection {
+  background: linear-gradient(
+    0deg,
+    #4d4d4d 0%,
+    #585858 50%,
+    #4d4d4d 100%
+  );
+  width: 5.6em;
+  height: 2.2em;
+  border: 0.05em #7e7e7e solid;
+  border-radius: 2em;
+  box-shadow: 
+    inset 0 0 0.5em #282828,
+    inset 0 0 0.1em #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.checkboxSelection .slideSelection {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  height: 1.8em;
+  width: 160%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 2em;
+  padding: 0 1em;
+  transition: 0.8s;
+}
+
+.checkboxSelection .smallKnobSelection {
+  background: linear-gradient(
+    0deg,
+    #dedede,
+    #aaaaaa
+  );
+  position: absolute;
+  top: 0;
+  left: 52%;
+  width: 1.8em;
+  height: 1.8em;
+  transform: translateX(-50%);
+  border-radius:50%;
+  box-shadow: 
+    inset 0 0.1em 0 #e8e9e9,
+    inset 0 -0.1em 0 #a9a9a9;
+}
+
+.checkboxSelection span {
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  color: #282828;
+  text-shadow: #969696 0.05em 0.05em 0;
+  transition: 0.3s;
+  transition-delay: 300ms;
+  color: lightgrey;
+}
+
+.checkboxSelection input:checked + .sliderSelection .slideSelection {
+  left: -3.50em;
+}
+
+.checkboxSelection input:checked + .sliderSelection .onSelection{
+  color: lightblue;
+  text-shadow: 
+    #000 0 -0.04em 0,
+    #00f5d1 0 0 1.5em;
+}
+
+/*buttons used to select in which octave you want to play*/
+.octaveSelection{
+  position:relative;
+  left:2.75vh;
+  /*background: linear-gradient(
+    0deg,
+    #dedede,
+    #aaaaaa
+  );
+ box-shadow: 
+    inset 0 0.1em 0 #e8e9e9,
+    inset 0 -0.1em 0 #a9a9a9;*/
+}
+
+.minusPitch {
+  background: #606060;
+  box-shadow:  1px 1px 2px #292929,
+             -1px -1px 2px #979797;
+  width: 25px;
+  height: 25px;
+}
+
+.plusPitch {
+  background: #606060;
+  box-shadow:  1px 1px 2px #292929,
+             -1px -1px 2px #979797;
+  width: 25px;
+  height: 25px;
+}
+
+/*Button that turns on or off the keyboard*/
+#turnoff-button{
+  position:relative;
+  top: 8vh;
+  left:2.5vh;
+  border-radius: 5px;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  color: lightgrey;
+}
+
+
+/*TALKBOX**********************************/
+#recorder {
+  position: absolute;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  background-image:url('https://img.pixers.pics/pho_wat(s3:700/FO/70/16/42/88/700_FO70164288_13e60070f9cca63bbeb9dbad97e6dea9.jpg,700,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,650,jpg)/adesivi-metallo-lucido-sfondo-trama.jpg.jpg');
+  background-position: 0px 0px;
+  box-shadow:  -5px -5px 10px #262626,
+             5px 5px 10px #9a9a9a;
+  border-radius: 7px;
+  width:300px;
+  height:500px;
+  position:absolute;
+  top: 165px;
+  left: 150px;
+}
+
+.label {
+  color: lightgrey;
+}
+
+.labelRec {
+  margin: 5px 5px 5px 5px;
+  font-family: Helvetica, sans-serif;
+  font-size : 15px;
+  font-weight: bold;
+  text-shadow: #000000 0.1em 0.1em 0;
+}
+
+
+#canvasRecorder {
+  position: relative;
+  width:250px;
+  height:150px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: inset -9px -9px 18px #000000,
+            inset 9px 9px 18px #000000;
+  top: 3%;
+}
+
+.high-bar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  top: 6%;
+}
+
+.high-right-bar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  top: 6%;
+}
+
+/*small screen to display the selected random speed*/
+#randomVelocity {
+  position: relative;
+  width: 45px;
+  height: 15px;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: inset -2px -2px 3px #000000,
+            inset 2px 2px 3px #000000;
+  top: -4px;
+  font-family: Helvetica, sans-serif;
+  color: #282828;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+#randomVelocity span {
+  position: relative;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  color: #282828;
+  text-shadow: #969696 0.05em 0.05em 0;
+  top: 2px;
+}
+
+/*styling of the Random button*/
+.rnd {
+  position: relative;
+  left: -10%;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  outline: none;
+  border: 4px #4d4d4d solid;
+  background: linear-gradient(
+    0deg,
+    #dedede,
+    #aaaaaa
+  );
+  box-shadow: -2px -2px 10px #141414;
+}
+
+.rnd span {
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  color: #282828;
+  font-size: 0.7em;
+  text-shadow: #969696 0.05em 0.05em 0;
+  transition: 0.3s;
+  transition-delay: 300ms;
+}
+
+.rnd::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: inherit;
+  background: linear-gradient(
+    0deg,
+    #dedede,
+    #aaaaaa
+  );
+  width: 3.10em;
+  height: 3.15em;
+  z-index: -1;
+  box-shadow: 1px 1px 5px #141414,
+    -1px -1px 5px #525252;
+}
+
+.button-clicked {
+  background: linear-gradient(
+    -50deg,
+    #dedede,
+    #aaaaaa
+    );
+  box-shadow: 
+    inset 0 0 0.5em #282828,
+    inset 0 0 0.1em #000;
+}
+
+.icon-clicked {
+  color: white;
+  text-shadow: 0px 0px 15px #008ECE;
+}
+
+/*styling of the slider that lets you decide the random speed*/
+.SLDTalkbox {
+  position: relative;
+  cursor: pointer;
+  align-items: center;
+  width: 10em;
+  height: 1.2em;;
+  border-radius: 1em;
+  background: linear-gradient(315deg, #838383, #9c9b9b);
+box-shadow:  
+  inset 0 0.05em 0 #616363,
+  inset 0 -0.05em 0 #c4c4c4;
+  display: flex;
+  justify-content: center;
+  align-elements: center;
+  position: relative;
+  top:-1px;
+}
+
+.sliderTopTalkbox {
+  appearance:none;
+  background: linear-gradient(
+    0deg,
+    #4d4d4d 0%,
+    #585858 50%,
+    #4d4d4d 100%
+  );
+  width: 12em;
+  height: 1em;
+  border: 0.05em #7e7e7e solid;
+  border-radius: 2em;
+  box-shadow: 
+    inset 0 0 0.5em #282828,
+    inset 0 0 0.1em #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.SLDTalkbox .sliderTopTalkbox::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  appearance: none;
+  width: 1em;
+  height: 1em;
+  background: linear-gradient(
+    0deg,
+    #dedede,
+    #5f5a5a
+  );
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 0.1em 0 #a9a9a9,
+    inset 0 -0.1em 0 #7f7f7f;
+}
+
+/*styling of the button that lets you listen what you've recorded*/
+.boxTest {
+  position: relative;
+  align-items: center;
+  width: 50px;
+  height: 30px;
+  border-radius: 5px;
+  background: linear-gradient(315deg, #838383, #9c9b9b);
+box-shadow:  
+  inset 0 0.05em 0 #616363,
+  inset 0 -0.05em 0 #c4c4c4;
+  display: flex;
+  justify-content: center;
+  align-elements: center;
+  position: relative;
+  top:45px;
+  padding: 3px;
+}
+
+.test {
+	background-color:#ba2323;
+	padding: 2px;
+	position:relative;
+  width: 100px;
+	font-family: Helvetica, sans-serif;
+	font-size: 13px;
+  font-weight: bold;
+	text-decoration:none;
+	color: lightgrey;
+	border: solid 1px black;
+	background: linear-gradient(
+    0deg,
+    #4d4d4d 0%,
+    #585858 50%,
+    #4d4d4d 100%
+  );
+	border-radius: 5px;
+  cursor: pointer;
+}
+
+.test:active {
+	padding-bottom:1px;
+	padding-left:2px;
+	padding-right:2px;
+	padding-top:3px;
+	background-image: linear-gradient(bottom, rgb(171,27,27) 100%, rgb(212,51,51) 0%);
+}
+
+/*styling of the two knobs*/
+.knob-container::before {
+  content: '';
+  position: absolute;
+  background-image:url('https://media.istockphoto.com/photos/brushed-metal-steel-or-aluminum-circular-texture-background-picture-id540501392?k=20&m=540501392&s=170667a&w=0&h=acRLAZEaGZtdXH6UsvRMRHWGC8cZUnh8OTU_wCpvfBM=');
+  background-position: -175.5px -1005px;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+  box-shadow: 
+    5px 5px 10px  #757575,
+    -5px -5px 10px #111111,
+    inset -5px -5px 6px #979797,
+    inset 0px 0px 6px #242424;
+  top: 51%;
+}
+
+.knob-container2::before {
+  content: '';
+  position: absolute;
+  background-image:url('https://media.istockphoto.com/photos/brushed-metal-steel-or-aluminum-circular-texture-background-picture-id540501392?k=20&m=540501392&s=170667a&w=0&h=acRLAZEaGZtdXH6UsvRMRHWGC8cZUnh8OTU_wCpvfBM=');
+  background-position: -175.5px -1005px;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+  box-shadow: 
+    5px 5px 10px  #757575,
+    -5px -5px 10px #111111,
+    inset -5px -5px 6px #979797,
+    inset 0px 0px 6px #242424;
+  top: 71%;
+}
+
+.knob{
+  width: 4em;
+  height: 4em;
+  position:relative;
+  top: 109%;
+}
+
+.knob::before,
+.knob::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+.knob::before {
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #5f1109;
+  box-shadow:
+    0px 0px 10px white;
+}
+
+.knob::after {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid lightblue;
+  width: 125%;
+  height: 125%;
+  box-shadow: 
+    0px 0px 10px white,
+    inset 0px 0px 10px white;
+}
+
+
+.lowerKnob {
+  width: 4em;
+  height: 4em;
+  position:relative;
+  top: 166%;
+}
+
+.low-bar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  top: 19%;
+}
+
+/*styling of the ONOFF button*/
+.checkbox {
+  position: relative;
+  cursor: pointer;
+  align-items: center;
+  width: 6.5em;
+  height: 3em;
+  border-radius: 2em;
+  background: linear-gradient(315deg, #838383, #9c9b9b);
+box-shadow:  
+  inset 0 0.05em 0 #616363,
+  inset 0 -0.05em 0 #c4c4c4;
+  display: flex;
+  justify-content: center;
+  align-elements: center;
+  position: relative;
+  font-size: 10px;
+  top: -29px;
+  left: -50px;
+}
+
+.checkbox input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.checkbox .slider {
+  background: linear-gradient(
+    0deg,
+    #4d4d4d 0%,
+    #585858 50%,
+    #4d4d4d 100%
+  );
+  width: 5.6em;
+  height: 2.2em;
+  border: 0.05em #7e7e7e solid;
+  border-radius: 2em;
+  box-shadow: 
+    inset 0 0 0.5em #282828,
+    inset 0 0 0.1em #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.checkbox .slide {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  height: 1.8em;
+  width: 160%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 2em;
+  padding: 0 1em;
+  transition: 0.8s;
+}
+
+.checkbox .smallKnob {
+  background: linear-gradient(
+    0deg,
+    #dedede,
+    #aaaaaa
+  );
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1.8em;
+  height: 1.8em;
+  transform: translateX(-50%);
+  border-radius:50%;
+  box-shadow: 
+    inset 0 0.1em 0 #e8e9e9,
+    inset 0 -0.1em 0 #a9a9a9;
+}
+
+.checkbox span {
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  color: #282828;
+  text-shadow: #969696 0.05em 0.05em 0;
+  transition: 0.3s;
+  transition-delay: 300ms;
+}
+
+.checkbox input:checked + .slider .slide {
+  left: -3.35em;
+}
+
+.checkbox input:checked + .slider .on {
+  color: lightblue;
+  text-shadow: 
+    #000 0 -0.04em 0,
+    #00f5d1 0 0 1.5em;
+}
+
+/*styling of the recording button*/
+#rec {
+  position: relative;
+  border-radius: 7px;
+  background: linear-gradient(315deg, #5f1109, #70140b);
+box-shadow:  -5px -5px 100px #2a0804,
+             5px 5px 100px #a81e10;
+  margin: 160px 0px 0px 0px;
+  cursor: pointer;
+  top: -110px;
+  left: -32px;
+}
+
+.labelRec {
+  color: lightblue;
+  text-shadow: #000000 0.1em 0.1em 0;
+}
+
+.NonActiveRec {
+  color: lightgrey;
+  text-shadow: #000000 0.1em 0.1em 0;
+}
+
+
+
+/*ULTIMO BLOCCO***********************************/
+#RegistratoreSample {
+  font-family: Helvetica, sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  width: 65vw;
+  height: 17vh;
+  top: 90%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  background-image: url("https://www.windowo.it/data/prod/img/paros_maniglia_per_porta_su_rosetta_in_marmo_nero_marquina_made_in_italy_by_mandelli1953.jpg");
+  box-shadow:  -5px -5px 10px #262626,
+             5px 5px 10px #9a9a9a;
+  border-radius: 5px;
+}
+
+
+/*.controlBar {
+  width: 10vw;
+  height: 15vh;
+}
+
+#canvasRegistratoreSample {
+  position: relative;
+  width:50vw;
+  height:15vh;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: inset -9px -9px 18px #000000,
+            inset 9px 9px 18px #000000;
+}
+
+#recordingRS {
+  position: relative;
+  border-radius: 7px;
+  background: linear-gradient(315deg, #5f1109, #70140b);
+  box-shadow:  -5px -5px 100px #2a0804,
+             5px 5px 100px #a81e10;
+  cursor: pointer;
+  width: 6vw;
+  height: 3vh;
+}
+
+
+.effetti {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}*/
+
+#filters {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.filterSliders {
+  position:relative;
+  font-family: Helvetica, sans-serif;
+  font-color: white;
+}
+
+#Echos {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.EchoSliders {
+  position:relative;
+  font-family: Helvetica, sans-serif;
+  font-color: white;
+}
+
+#freqDifference {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.SLDdown {
+  position: relative;
+  cursor: pointer;
+  align-items: center;
+  width: 10em;
+  height: 1.2em;;
+  border-radius: 1em;
+  background: linear-gradient(315deg, #838383, #9c9b9b);
+box-shadow:  
+  inset 0 0.05em 0 #616363,
+  inset 0 -0.05em 0 #c4c4c4;
+  display: flex;
+  justify-content: center;
+  align-elements: center;
+  position: relative;
+  top:-1px;
+}
+
+.sliderdown {
+  appearance:none;
+  background: linear-gradient(
+    0deg,
+    #4d4d4d 0%,
+    #585858 50%,
+    #4d4d4d 100%
+  );
+  width: 12em;
+  height: 1em;
+  border: 0.05em #7e7e7e solid;
+  border-radius: 2em;
+  box-shadow: 
+    inset 0 0 0.5em #282828,
+    inset 0 0 0.1em #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.SLDdown .sliderdown::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  appearance: none;
+  width: 1em;
+  height: 1em;
+  background: linear-gradient(
+    0deg,
+    #dedede,
+    #5f5a5a
+  );
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 0.1em 0 #a9a9a9,
+    inset 0 -0.1em 0 #7f7f7f;
+}
