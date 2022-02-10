@@ -1,7 +1,8 @@
-# PROGETTO ACTAM
+# URJ-3000 - ACTAM PROJECT
 
 ## INTRODUCTION
 The main goal of our project is to implement a multifunctional system wich is able to give to the executor a creative tool for music production and live sessions, just using his laptop.
+The project is a web application developed using HTML, JS and CSS. We used HTML in order to define the static interface and structure of the page, CSS to apply some style attributes to the page components and JS to render the dynamic components of the page and manage all the user interactions with the page.
 
 ![image](https://user-images.githubusercontent.com/99413338/153431863-db803599-3b4f-4e30-a2ea-b3d62d7e221b.png)
 
@@ -9,7 +10,7 @@ The main goal of our project is to implement a multifunctional system wich is ab
 Our system is carachterised by three main sections:
 
 ### Recorder
-This allows the executor to record his voice or an instrument through the mic input. ![image](https://user-images.githubusercontent.com/99413338/153432794-0ae2fb83-6d11-425a-a3ce-8d7c38b9004a.png)
+This sort of "Talkbox" allows the executor to record his voice or an instrument through the mic input. ![image](https://user-images.githubusercontent.com/99413338/153432794-0ae2fb83-6d11-425a-a3ce-8d7c38b9004a.png)
 
 Starting from the lower buttons, the ON/OFF  switcher activate the recorder, and the REC button allows you to start and stop the recording whenever you want.
 
