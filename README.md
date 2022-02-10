@@ -3,7 +3,7 @@
 ## INTRODUCTION
 The main goal of our project is to implement a multifunctional system wich is able to give to the executor a creative tool for music production and live sessions, just using his laptop.
 
-![image](https://user-images.githubusercontent.com/99413338/153431863-db803599-3b4f-4e30-a2ea-b3d62d7e221b.png)
+![image](https://user-images.githubusercontent.com/99413338/153466062-5cc4423d-43fd-4890-80d6-a4aeb47b87f2.png)
 
 ## SECTIONS
 Our system is carachterised by three main sections:
