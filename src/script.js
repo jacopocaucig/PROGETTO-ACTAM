@@ -861,71 +861,80 @@ function draw() {
 
 draw();
 
-$("#attackRange").on("change", function () {
-  adsrEnv.attack = Number($("#attackRange").val());
+//change functions
+document.querySelector("#attackRange").addEventListener("onchange", ()=>{
+  adsrEnv.attack = Math.floor(document.querySelector("#attackRange").value*100)/100;
   draw();
-  $("#attack").html($(this).val());
+  document.querySelector("#attack").innerHTML = adsrEnv.attack;
 });
 
-$("#decayRange").on("change", function () {
-  adsrEnv.decay = Number($("#decayRange").val());
+document.querySelector("#sustainRange").addEventListener("onchange", ()=>{
+  adsrEnv.sustain = Math.floor(document.querySelector("#sustainRange").value*100)/100;
   draw();
-  $("#decay").html($(this).val());
+  document.querySelector("#sustain").innerHTML = adsrEnv.sustain;
 });
 
-$("#sustainRange").on("change", function () {
-  adsrEnv.sustain = Number($("#sustainRange").val());
+document.querySelector("#decayRange").addEventListener("onchange", ()=>{
+  adsrEnv.decay = Math.floor(document.querySelector("#decayRange").value*100)/100;
   draw();
-  $("#sustain").html($(this).val());
+  document.querySelector("#decay").innerHTML = adsrEnv.decay;
 });
 
-$("#releaseRange").on("change", function () {
-  adsrEnv.release = Number($("#releaseRange").val());
+document.querySelector("#releaseRange").addEventListener("onchange", ()=>{
+  adsrEnv.release = Math.floor(document.querySelector("#releaseRange").value*100)/100;
   draw();
-  $("#release").html($(this).val());
+  document.querySelector("#release").innerHTML = adsrEnv.release;
 });
 
-$("#attackRange").on("mousemove", function () {
-  adsrEnv.attack = Number($("#attackRange").val());
+document.querySelector("#deltaSlider").addEventListener("onchange", ()=>{
+  delta = Math.floor(document.querySelector("#deltaSlider").value*100)/100;
   draw();
-  $("#attack").html($(this).val());
+  document.querySelector("#deltaValue").innerHTML = `Detune: ${delta} Hz`;
 });
 
-$("#decayRange").on("mousemove", function () {
-  adsrEnv.decay = Number($("#decayRange").val());
+document.querySelector("#gainRange").addEventListener("onchange", ()=>{
+  adsrEnv.gain = Math.floor(document.querySelector("#gainRange").value*100)/100;
   draw();
-  $("#decay").html($(this).val());
+  document.querySelector("#gain").innerHTML = adsrEnv.gain;
 });
 
-$("#sustainRange").on("mousemove", function () {
-  adsrEnv.sustain = Number($("#sustainRange").val());
+//mousemove functions
+document.querySelector("#attackRange").addEventListener('mousemove', ()=>{
+  adsrEnv.attack = Math.floor(document.querySelector("#attackRange").value*100)/100;
   draw();
-  $("#sustain").html($(this).val());
-});
+  document.querySelector("#attack").innerHTML = adsrEnv.attack;
+})
 
-$("#releaseRange").on("mousemove", function () {
-  adsrEnv.release = Number($("#releaseRange").val());
+document.querySelector("#sustainRange").addEventListener("mousemove", ()=>{
+  adsrEnv.sustain = Math.floor(document.querySelector("#sustainRange").value*100)/100;
   draw();
-  $("#release").html($(this).val());
+  document.querySelector("#sustain").innerHTML = adsrEnv.sustain;
 });
 
-$("#gainRange").on("change", function () {
-  adsrEnv.gain = Number($("#gainRange").val());
+document.querySelector("#decayRange").addEventListener("mousemove", ()=>{
+  adsrEnv.decay = Math.floor(document.querySelector("#decayRange").value*100)/100;
   draw();
-  $("#gain").html($(this).val());
+  document.querySelector("#decay").innerHTML = adsrEnv.decay;
 });
 
-$("#gainRange").on("mousemove", function () {
-  adsrEnv.gain = Number($("#gainRange").val());
+document.querySelector("#releaseRange").addEventListener("mousemove", ()=>{
+  adsrEnv.release = Math.floor(document.querySelector("#releaseRange").value*100)/100;
   draw();
-  $("#gain").html($(this).val());
+  document.querySelector("#release").innerHTML = adsrEnv.release;
 });
 
-$("#deltaSlider").on("mousemove", function () {
-  delta = Number($("#deltaSlider").val());
-  $("#deltaValue").html(`Detune: ${$(this).val()} Hz`);
+document.querySelector("#deltaSlider").addEventListener("mousemove", ()=>{
+  delta = Math.floor(document.querySelector("#deltaSlider").value*100)/100;
+  draw();
+  document.querySelector("#deltaValue").innerHTML = `Detune: ${delta} Hz`;
 });
 
+document.querySelector("#gainRange").addEventListener("mousemove", ()=>{
+  adsrEnv.gain = Math.floor(document.querySelector("#gainRange").value*100)/100;
+  console.log(adsrEnv.gain);
+  draw();
+  document.querySelector("#gain").innerHTML = adsrEnv.gain;
+});
 
 
 function plusPitch(){

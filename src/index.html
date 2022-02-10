@@ -4,14 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <title>CodePen - backup progetto actam</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 
 
 
 <body>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-
   <div id="root">
 
     <div id="synth">
@@ -205,7 +202,7 @@
         <div class="label labelRec"> REC/STOP </div>
     </canvas> -->
     <fieldset id="filters" style="border: 3px double white; height: 14vh">
-      <legend style="color: white; font-family:Helvetica, sans-serif;"><strong>FILTRI</strong> </legend>
+      <legend style="color: white; font-family:Helvetica, sans-serif;"><strong>FILTERS</strong> </legend>
 
       <div class="SLDdown"><input type="range" class="sliderdown" id="LOWFilter" min="0.001" max="0.5" value="0.5"
           step="0.0001" onchange="LOWfilterSliderFreq = parseFloat(this.value)"></div><span
@@ -243,5 +240,6 @@
     </div>
   </div>
 </body>
+<link rel="stylesheet" href="style.css">
 <script src="script.js"></script>
 </html>
