@@ -7,26 +7,26 @@ The project is a web application developed using HTML, JS and CSS. We used HTML 
 
 ![image](https://user-images.githubusercontent.com/99413338/153431863-db803599-3b4f-4e30-a2ea-b3d62d7e221b.png)
 
-## Sections
+## User Interface
 Our system is carachterised by three main sections:
 
 ### Recorder
 This sort of "Talkbox" allows the executor to record his voice or an instrument through the mic input. ![image](https://user-images.githubusercontent.com/99413338/153432794-0ae2fb83-6d11-425a-a3ce-8d7c38b9004a.png)
 
-Starting from the lower buttons, the ON/OFF  switcher activate the recorder, and the REC button allows you to start and stop the recording whenever you want.
+Starting from the lower buttons, the ON/OFF switcher activate the recorder, and the REC button allows you to start and stop the recording whenever you want.
 
 ![image](https://user-images.githubusercontent.com/99413338/153433034-aab30257-6e64-4cb9-aae1-751ccfc7cbb6.png)
 
-Then you can select a section of our recording trough the two knobs implemented in the middle section: 
-with the upper one you can choose where the section starts, and with the lower one where the section ends.
+It is possible can select a sample of the recording trough the two knobs implemented in the middle section: 
+with the upper one you can choose where the sample starts, and with the lower one where the sample ends.
 
 ![image](https://user-images.githubusercontent.com/99413338/153433138-886f48d0-3493-4c97-8722-b658699dc605.png)
 
-If you  want to hear what you have selected trough the knobs, there is a button TEST that allows you to do that.
+If you  want to hear and check what you have selected trough the knobs, there is a button TEST that allows you to do that.
 
 ![image](https://user-images.githubusercontent.com/99413338/153433223-6e29ee1a-083f-4da1-8dd5-3413734c352c.png)
 
-On the upper section, there is a granular tool where, pressing the RND button and selecting the random speed with a slider, the system starts playing some random sections of the recording, that have the same length of the main section and that change with the selected velocity.
+On the upper section there is the "Randomizer",a granular tool which takes random particles of the recorded signal and is activated by pressing the RND button. In this section you can also select the random speed with a slider that goes from 0.1 to 3.0: the system starts playing some random particles of the recording, that have the same length of the main section and change with the selected velocity. 
 
 ![image](https://user-images.githubusercontent.com/99413338/153433303-526d4a5e-42eb-457a-86a7-2c3c974d6be0.png)
 
