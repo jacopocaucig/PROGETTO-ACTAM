@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 import { firebase } from '@firebase/app';
 import "firebase/firestore";
 import 'regenerator-runtime/runtime';
+import $ from "jquery";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,7 +20,6 @@ const firebaseConfig = {
 
 var preset;
 window.preset = preset;
-var $ = require("jquery");
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -36,8 +37,16 @@ function dbCallback(snapshot) {
 
 function upload() {
   let NewPreset = {};
-  NewPreset.gain = 1;
-  NewPreset.attack = 0.4;
+  NewPreset.Attack = document.querySelector("#attackRange").value;
+  NewPreset.Sustain = document.querySelector("#decayRange").value;
+  NewPreset.Decay = document.querySelector("#sustainRange").value;
+  NewPreset.Release = document.querySelector("#releaseRange").value;
+  NewPreset.Gain = document.querySelector("#gainRange").value;
+  NewPreset.LowPass = document.querySelector("#LOWFilter").value;
+  NewPreset.HighPass = document.querySelector("#HIGHFilter").value;
+  NewPreset.EchoDelay = document.querySelector("#TimeOfDelay").value;
+  NewPreset.EchoGain = document.querySelector("#GainOfDelay").value;
+  NewPreset.FreqDifference = document.querySelector("#deltaSlider").value;
   db.collection("presets").add(NewPreset)
   .then(function (docRef) {
     docRef.get().then(function (snap) {
@@ -53,6 +62,8 @@ function upload() {
 }
 
 window.upload=upload;
+
+
 
 
 //TALKBOX***************************************************************************
@@ -178,8 +189,8 @@ function startKnob2(e) {
   const h2 = knob2.clientHeight / 2;
 
   //get the mouse coordinates
-  const x2 = e.clientX - (150 + 118);
-  const y2 = e.clientY - (165 + 356);
+  const x2 = e.clientX - (150+118);
+  const y2 = e.clientY - (165+356);
 
   //calculating delta values
   const deltaX2 = w2 - x2;
@@ -356,14 +367,14 @@ document.querySelector("#rec").onclick = function () {
 
 function ONOFF() {
   var ciao = document.getElementById("accensione").checked == true;
-
+  
   if (ciao == true) {
     c.resume();
   }
   else {
     c.suspend();
   }
-
+  
   return ciao
 }
 
@@ -395,38 +406,38 @@ function updateRandom() {
 
 //function used to call a certain number of times (repetitions) the same buffer section after a certain delay
 function setIntervalX(callback, delay, repetitions) {
-  var x = 0;
-  var intervalID = window.setInterval(function () {
+    var x = 0;
+    var intervalID = window.setInterval(function () {
 
-    playSlice(rndgrainStart, rndgrainEnd, 1)
+       playSlice(rndgrainStart, rndgrainEnd, 1)
 
-    if (++x === repetitions) {
-      window.clearInterval(intervalID);
-    }
-  }, delay);
+       if (++x === repetitions) {
+           window.clearInterval(intervalID);
+       }
+    }, delay);
 }
 
 //function that plays the slices of buffer selected by the Random bounds
 function PlayRandom() {
   var diff = rndgrainEnd - rndgrainStart;
   //when the duration of the selected slice of buffer is greater then the speed of the random update, the function only plays a part of the selected slice that has the same time duration as the speed od the random update
-  if (diff * 10 > speedRnd * 0.001) {
-    var rndgrainEndNew = rndgrainStart + (speedRnd * 0.0001);
-    playSlice(rndgrainStart, rndgrainEndNew, 1)
+  if(diff*10 > speedRnd*0.001) {    
+    var rndgrainEndNew = rndgrainStart + (speedRnd*0.0001);
+    playSlice(rndgrainStart,rndgrainEndNew,1)
   }
   //when the duration of the selected slice of buffer is less greater then the speed of the random update, the function plays the selected slice of buffer DecNumber+IntNumer of times
   else {
-    var IntNumber = Math.trunc((speedRnd / 1000) / (diff * 10));    //parte intera
-    var DecNumber = ((speedRnd / 1000) / (diff * 10)) - IntNumber;  //parte decimale
-    setIntervalX(playSlice(rndgrainStart, rndgrainEnd, 1), (rndgrainEnd - rndgrainStart) * 10000, IntNumber);
-    setTimeout(playSlice(rndgrainStart, rndgrainStart + (DecNumber / 10), 1), (rndgrainEnd - rndgrainStart) * 10000 * IntNumber)
+    var IntNumber = Math.trunc((speedRnd/1000)/(diff*10));    //parte intera
+    var DecNumber = ((speedRnd/1000)/(diff*10)) - IntNumber;  //parte decimale
+    setIntervalX(playSlice(rndgrainStart, rndgrainEnd, 1),(rndgrainEnd-rndgrainStart)*10000, IntNumber);
+    setTimeout(playSlice(rndgrainStart, rndgrainStart + (DecNumber/10), 1), (rndgrainEnd-rndgrainStart)*10000*IntNumber)
   }
 }
 
 //function that changes the value of the rnd button when clicked
 function activeOrNot() {
   if (document.querySelector(".rnd").value == "false") { activateRnd(); }
-  else { deactivateRnd() }
+  else { deactivateRnd()}
 }
 /*éfunction activeOrNot() {
   if (document.querySelector(".rnd").value == "false") { document.querySelector(".rnd").value = "true" }
@@ -439,21 +450,21 @@ var rndInterval2 = 0;
 
 //function that, when the rnd button is true, plays the selected section with PlayRandom() and updates it
 function activateRnd() {
-  document.querySelector(".rnd").value = "true";
-  rndInterval = setInterval(updateRandom, speedRnd);
-  rndInterval2 = setInterval(PlayRandom, speedRnd);
+    document.querySelector(".rnd").value = "true";
+    rndInterval = setInterval(updateRandom, speedRnd);
+    rndInterval2 = setInterval(PlayRandom, speedRnd);
 }
 
 //function that is used to clear all the intervals that are created by the activateRnd() function
 function deactivateRnd() {
-  document.querySelector(".rnd").value = "false";
-  clearInterval(rndInterval);
-  clearInterval(rndInterval2);
+    document.querySelector(".rnd").value = "false";
+    clearInterval(rndInterval);
+    clearInterval(rndInterval2);
 }
 
 //function used to play the selected buffer's slice when the TEST button is clicked
 document.querySelector(".test").onclick = function () {
-  playSlice(sliceStart, sliceEnd, 1)
+ playSlice(sliceStart, sliceEnd, 1)
 };
 
 
@@ -463,6 +474,7 @@ let adsrCanvas = document.getElementById("adsrGraph");
 let adsrCtx = adsrCanvas.getContext("2d");
 let oscillatorsON = 0;
 var n = 0;
+let delta = 0;
 
 let adsrEnv = {
   attack: 0.05,
@@ -482,6 +494,8 @@ let waveType = "sine";
 const keys = "w3e4rt6y7u8izsxdcvgbhnjm";
 //const keys = "zsxdcvgbhnjm";
 let oscillators = Array(keys.length);
+let oscillatorsPlusDelta = Array(keys.length);
+let oscillatorsMinusDelta = Array(keys.length);
 let gains = Array(keys.length);
 
 document.onkeydown = (e) => {
@@ -492,7 +506,7 @@ document.onkeydown = (e) => {
   if (e.repeat) return;
 
   var selezioneInput = document.getElementById("selezioneInput").checked == true;
-
+  
   if (selezioneInput == true) {
     playNote(keys.indexOf(e.key), isOn);
   }
@@ -500,7 +514,7 @@ document.onkeydown = (e) => {
     /*if (document.querySelector(".rnd").value == "false") {
     playSlice(sliceStart,sliceEnd,Math.pow(2,n)*Math.pow(2, keys.indexOf(e.key) / 12));
     }*/
-    playSlice(sliceStart, sliceEnd, Math.pow(2, n) * Math.pow(2, keys.indexOf(e.key) / 12));
+    playSlice(sliceStart,sliceEnd,Math.pow(2,n)*Math.pow(2, keys.indexOf(e.key) / 12));
   }
   // console.log(parseInt(window.getComputedStyle(document.querySelector(`.${e.key}`)).backgroundColor.split(', ')[1])-50)
 };
@@ -533,38 +547,50 @@ playNote = (nFreq, isOnFlag) => {
   oscillatorsON = oscillatorsON + 1;
   const now = ac.currentTime;
   var o = ac.createOscillator();
+  var opd = ac.createOscillator();
+  var omd = ac.createOscillator();
   var g = ac.createGain();
   oscillators[nFreq] = o;
+  oscillatorsPlusDelta[nFreq] = opd;
+  oscillatorsMinusDelta[nFreq] = omd;
   gains[nFreq] = g;
   oscillators[nFreq].type = document
     .querySelector(".waveform.active")
     .classList.value.split(" ")[1];
+  oscillatorsPlusDelta[nFreq].type = document
+      .querySelector(".waveform.active")
+      .classList.value.split(" ")[1];
+  oscillatorsMinusDelta[nFreq].type = document
+      .querySelector(".waveform.active")
+      .classList.value.split(" ")[1];
   oscillators[nFreq].connect(gains[nFreq]);
-
-  const maxFilterFreq = ac.sampleRate / 2;
-
+  oscillatorsPlusDelta[nFreq].connect(gains[nFreq]);
+  oscillatorsMinusDelta[nFreq].connect(gains[nFreq]);
+  
+  const maxFilterFreq = ac.sampleRate/2;
+  
   //LOW-PASS FILTER
   const LOWfilter = ac.createBiquadFilter();
   LOWfilter.type = "lowpass";
   LOWfilter.frequency.value = LOWfilterSliderFreq * maxFilterFreq;
-
+  
   //HIGH-PASS FILTER
   const HIGHfilter = ac.createBiquadFilter();
   HIGHfilter.type = "lowpass";
   HIGHfilter.frequency.value = HIGHfilterSliderFreq * maxFilterFreq;
-
+  
   //ECHO or DELAY
   const echo = {
-    maxDuration: 1
+    maxDuration:1
   }
-
+  
   const delayNode = ac.createDelay();
-  delayNode.delayTime.value = TimeDelay * echo.maxDuration;
+  delayNode.delayTime.value = TimeDelay*echo.maxDuration;
   delayNode.connect(ac.destination)
-
+  
   const gainEcho = ac.createGain();
   gainEcho.gain.value = GainDelay;
-
+  
 
   gains[nFreq].connect(a)
   gains[nFreq].connect(LOWfilter);
@@ -575,17 +601,21 @@ playNote = (nFreq, isOnFlag) => {
   delayNode.connect(gainEcho);
   gainEcho.connect(delayNode);
   gains[nFreq].gain.setValueAtTime(0, now);
-  gains[nFreq].gain.linearRampToValueAtTime(adsrEnv.gain * 0.5 / (2 * oscillatorsON), now + adsrEnv.attack);
+  gains[nFreq].gain.linearRampToValueAtTime(adsrEnv.gain*0.5/(3*oscillatorsON), now + adsrEnv.attack);
   gains[nFreq].gain.linearRampToValueAtTime(
-    adsrEnv.gain * adsrEnv.sustain * (0.5 / (2 * oscillatorsON)),
+    adsrEnv.gain*adsrEnv.sustain*(0.5/(3*oscillatorsON)),
     now + adsrEnv.attack + adsrEnv.decay
   );
-  oscillators[nFreq].frequency.value = Math.pow(2, n) * 220 * Math.pow(2, nFreq / 12);
+  oscillators[nFreq].frequency.value = Math.pow(2,n)*220 * Math.pow(2, nFreq / 12);
+  oscillatorsPlusDelta[nFreq].frequency.value = Math.pow(2,n)*220 * Math.pow(2, nFreq / 12) + delta;
+  //oscillatorsMinusDelta[nFreq].frequency.value = Math.pow(2,n)*220 * Math.pow(2, nFreq / 12) - delta;
   oscillators[nFreq].start(ac.currentTime);
+  oscillatorsPlusDelta[nFreq].start(ac.currentTime);
+  //oscillatorsMinusDelta[nFreq].start(ac.currentTime);
 
-  //oscillatorsON = oscillatorsON + 1;
+  oscillatorsON = oscillatorsON + 1;
   console.log(1 / oscillatorsON);
-
+  
   colorCode =
     parseInt(
       window
@@ -604,10 +634,10 @@ playNote = (nFreq, isOnFlag) => {
 stopNote = (nFreq, isOnFlag) => {
   if (!isOnFlag) return;
   const now = ac.currentTime;
-  gains[nFreq].gain.setValueAtTime(adsrEnv.gain * adsrEnv.sustain * (0.5 / (2 * oscillatorsON)), now);
-  gains[nFreq].gain.linearRampToValueAtTime(0, now + adsrEnv.release);
-  oscillatorsON = oscillatorsON - 1;
-  oscillators[nFreq].stop(now + adsrEnv.release + 0.05);
+  gains[nFreq].gain.setValueAtTime(adsrEnv.gain*adsrEnv.sustain*(0.5/(3*oscillatorsON)), now);
+  gains[nFreq].gain.linearRampToValueAtTime(0, now +adsrEnv.release);
+  oscillatorsON = oscillatorsON -1;
+  //oscillators[nFreq].stop(now+adsrEnv.release+0.05);
   gains[nFreq].disconnect(a)
 
   colorCode =
@@ -652,8 +682,9 @@ for (var i = 1; i <= keys.length; i++) {
   key.classList.add(`${keys.split("")[i - 1]}`);
   if (j === 2 || j === 4 || j === 7 || j === 9 || j === 11) {
     //tasti black
-    const style = `width: ${100 / 3 / countb}%; left: ${((100 / 3) * (3 / 2)) / countb + (fromLeftBlack * 100) / countw
-      }%;`;
+    const style = `width: ${100 / 3 / countb}%; left: ${
+      ((100 / 3) * (3 / 2)) / countb + (fromLeftBlack * 100) / countw
+    }%;`;
     key.classList.add("black");
     key.style = style;
     if (j === 4 || j === 11) {
@@ -662,8 +693,9 @@ for (var i = 1; i <= keys.length; i++) {
     fromLeftBlack++;
   } else {
     //tasti white
-    const style = `width: ${100 / countw}%; left: ${(fromLeftWhite * 100) / countw
-      }%;`;
+    const style = `width: ${100 / countw}%; left: ${
+      (fromLeftWhite * 100) / countw
+    }%;`;
     key.classList.add("white");
     key.style = style;
     fromLeftWhite++;
@@ -682,8 +714,9 @@ for (var i = 1; i <= keys.length; i++) {
 
 setSwitcher = (value) => {
   isOn = value;
-  document.querySelector("#turnoff-button").style = `background-color: ${isOn ? "#7fc846" : "#760f00"
-    }`;
+  document.querySelector("#turnoff-button").style = `background-color: ${
+    isOn ? "#7fc846" : "#760f00"
+  }`;
   // console.log(isOn)
 };
 
@@ -691,8 +724,9 @@ document
   .querySelector("#turnoff-button")
   .setAttribute("onclick", `setSwitcher(!isOn)`);
 
-document.querySelector("#turnoff-button").style = `background-color: ${isOn ? "#7fc846" : "#760f00"
-  }`;
+document.querySelector("#turnoff-button").style = `background-color: ${
+  isOn ? "#7fc846" : "#760f00"
+}`;
 
 // funzione che imposta il bottone ricevuto in input come 'active'
 setActive = (string) => {
@@ -742,12 +776,12 @@ let stringa='';
 
 // set up canvas context for visualizer
 
-var canvasElement = document.querySelector("canvas")
+var  canvasElement = document.querySelector("canvas")
 
 const ctx = canvasElement.getContext("2d")
 
-ctx.moveTo(0, 0)
-ctx.lineTo(100, 100)
+ctx.moveTo(0,0)
+ctx.lineTo(100,100)
 
 
 const a = ac.createAnalyser()
@@ -758,18 +792,18 @@ a.getFloatTimeDomainData(data)
 
 console.log(data)
 
-function draw1() {
+function draw1 () {
   a.getFloatTimeDomainData(data);
 
-  ctx.clearRect(0, 0, 1000, 1000);
+  ctx.clearRect(0,0,1000,1000);
   ctx.beginPath();
   const h = canvasElement.height;
-  ctx.moveTo(0, h / 2);
-
-  for (var i = 0; i < 1024; i++) {
-    ctx.lineTo(i, h / 2 + data[i] * h / 2)
+  ctx.moveTo(0,h/2);
+  
+  for(var i=0; i<1024;i++) {
+    ctx.lineTo(i, h/2+data[i]*h/2)
   }
-
+  
   ctx.stroke()
 }
 
@@ -799,7 +833,7 @@ function draw() {
   // Attack
   adsrCtx.beginPath();
   adsrCtx.moveTo(60, 250);
-  adsrCtx.lineTo((adsrEnv.attack / total) * 300 + current, 50 + 200 * (1 - adsrEnv.gain));
+  adsrCtx.lineTo((adsrEnv.attack / total) * 300 + current, 50+200*(1-adsrEnv.gain));
   current += (adsrEnv.attack / total) * 300;
 
   // Decay
@@ -827,75 +861,87 @@ function draw() {
 
 draw();
 
-$("#attackRange").on("change", function () {
-  adsrEnv.attack = Number($("#attackRange").val());
+//change functions
+document.querySelector("#attackRange").addEventListener("onchange", ()=>{
+  adsrEnv.attack = Math.floor(document.querySelector("#attackRange").value*100)/100;
   draw();
-  $("#attack").html($(this).val());
+  document.querySelector("#attack").innerHTML = adsrEnv.attack;
 });
 
-$("#decayRange").on("change", function () {
-  adsrEnv.decay = Number($("#decayRange").val());
+document.querySelector("#sustainRange").addEventListener("onchange", ()=>{
+  adsrEnv.sustain = Math.floor(document.querySelector("#sustainRange").value*100)/100;
   draw();
-  $("#decay").html($(this).val());
+  document.querySelector("#sustain").innerHTML = adsrEnv.sustain;
 });
 
-$("#sustainRange").on("change", function () {
-  adsrEnv.sustain = Number($("#sustainRange").val());
+document.querySelector("#decayRange").addEventListener("onchange", ()=>{
+  adsrEnv.decay = Math.floor(document.querySelector("#decayRange").value*100)/100;
   draw();
-  $("#sustain").html($(this).val());
+  document.querySelector("#decay").innerHTML = adsrEnv.decay;
 });
 
-$("#releaseRange").on("change", function () {
-  adsrEnv.release = Number($("#releaseRange").val());
+document.querySelector("#releaseRange").addEventListener("onchange", ()=>{
+  adsrEnv.release = Math.floor(document.querySelector("#releaseRange").value*100)/100;
   draw();
-  $("#release").html($(this).val());
+  document.querySelector("#release").innerHTML = adsrEnv.release;
 });
 
-$("#attackRange").on("mousemove", function () {
-  adsrEnv.attack = Number($("#attackRange").val());
+document.querySelector("#deltaSlider").addEventListener("onchange", ()=>{
+  delta = Math.floor(document.querySelector("#deltaSlider").value*100)/100;
   draw();
-  $("#attack").html($(this).val());
+  document.querySelector("#deltaValue").innerHTML = `Detune: ${delta} Hz`;
 });
 
-$("#decayRange").on("mousemove", function () {
-  adsrEnv.decay = Number($("#decayRange").val());
+document.querySelector("#gainRange").addEventListener("onchange", ()=>{
+  adsrEnv.gain = Math.floor(document.querySelector("#gainRange").value*100)/100;
   draw();
-  $("#decay").html($(this).val());
+  document.querySelector("#gain").innerHTML = adsrEnv.gain;
 });
 
-$("#sustainRange").on("mousemove", function () {
-  adsrEnv.sustain = Number($("#sustainRange").val());
+//mousemove functions
+document.querySelector("#attackRange").addEventListener('mousemove', ()=>{
+  adsrEnv.attack = Math.floor(document.querySelector("#attackRange").value*100)/100;
   draw();
-  $("#sustain").html($(this).val());
+  document.querySelector("#attack").innerHTML = adsrEnv.attack;
+})
+
+document.querySelector("#sustainRange").addEventListener("mousemove", ()=>{
+  adsrEnv.sustain = Math.floor(document.querySelector("#sustainRange").value*100)/100;
+  draw();
+  document.querySelector("#sustain").innerHTML = adsrEnv.sustain;
 });
 
-$("#releaseRange").on("mousemove", function () {
-  adsrEnv.release = Number($("#releaseRange").val());
+document.querySelector("#decayRange").addEventListener("mousemove", ()=>{
+  adsrEnv.decay = Math.floor(document.querySelector("#decayRange").value*100)/100;
   draw();
-  $("#release").html($(this).val());
+  document.querySelector("#decay").innerHTML = adsrEnv.decay;
 });
 
-$("#gainRange").on("change", function () {
-  adsrEnv.gain = Number($("#gainRange").val());
+document.querySelector("#releaseRange").addEventListener("mousemove", ()=>{
+  adsrEnv.release = Math.floor(document.querySelector("#releaseRange").value*100)/100;
   draw();
-  $("#gain").html($(this).val());
+  document.querySelector("#release").innerHTML = adsrEnv.release;
 });
 
-$("#gainRange").on("mousemove", function () {
-  adsrEnv.gain = Number($("#gainRange").val());
+document.querySelector("#deltaSlider").addEventListener("mousemove", ()=>{
+  delta = Math.floor(document.querySelector("#deltaSlider").value*100)/100;
   draw();
-  $("#gain").html($(this).val());
+  document.querySelector("#deltaValue").innerHTML = `Detune: ${delta} Hz`;
+});
+
+document.querySelector("#gainRange").addEventListener("mousemove", ()=>{
+  adsrEnv.gain = Math.floor(document.querySelector("#gainRange").value*100)/100;
+  console.log(adsrEnv.gain);
+  draw();
+  document.querySelector("#gain").innerHTML = adsrEnv.gain;
 });
 
 
-function plusPitch() {
-  n = n + 1;
+function plusPitch(){
+  n = n+1; 
 }
-function minusPitch() {
-  n = n - 1;
+function minusPitch(){
+  n = n-1; 
 }
 
 
-
-
-//https://www.windowo.it/data/prod/img/paros_maniglia_per_porta_su_rosetta_in_marmo_nero_marquina_made_in_italy_by_mandelli1953.jpg
