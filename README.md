@@ -33,9 +33,9 @@ On the upper section, there is a granular tool where, pressing the RND button an
     Fig.2 : selected section and random function ON
     
 ## Synth
-In this section a polyphonic synth is implemented. ù
+In this section a polyphonic synth is implemented. 
 
-![image](https://user-images.githubusercontent.com/99413338/153433946-6680e371-ef86-44f2-8f79-8143e36688e5.png)
+![image](https://user-images.githubusercontent.com/99413338/153464379-2acbafb0-bef0-49e9-8529-d063989ce5c8.png)
 
 In the lower section, there is  keyboard and some buttons: 
 
