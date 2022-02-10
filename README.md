@@ -5,7 +5,7 @@ The main goal of our project is to implement a multifunctional system wich is ab
 
 ![image](https://user-images.githubusercontent.com/99413338/153431863-db803599-3b4f-4e30-a2ea-b3d62d7e221b.png)
 
-## Sections
+## SECTIONS
 Our system is carachterised by three main sections:
 
 ## Recorder
