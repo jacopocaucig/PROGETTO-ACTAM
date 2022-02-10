@@ -130,8 +130,8 @@
 
           </div>
           <div class="octaveSelection">
-            <button onclick="minusPitch()" class="minusPitch"><span style="color:lightgrey">-</span></button>
-            <button onclick="plusPitch()" class="plusPitch"><span style="color:lightgrey">+</span></button>
+            <button id="-"  class="minusPitch"><span style="color:lightgrey">-</span></button>
+            <button id="+"  class="plusPitch"><span style="color:lightgrey">+</span></button>
           </div>
           <div class="buttons">
             <button id="turnoff-button">On/Off</button>
@@ -146,7 +146,7 @@
     <canvas id="canvasRecorder"></canvas>
 
     <div class="high-bar">
-      <button class="rnd" value="false" onclick="activeOrNot()">
+      <button class="rnd" value="false" id="random">
         <span class="label labelRandom labelRandomOn">
           RND
         </span>
@@ -154,7 +154,7 @@
       <div class="high-right-bar">
         <div id="randomVelocity"> <span id="speed" value=""> </span> </div>
         <div class="SLDTalkbox">
-          <input type="range" class="sliderTopTalkbox" min="100" max="3000" value="100" step="10"
+          <input type="range" class="sliderTopTalkbox" min="100" max="3000" value="100" step="10" id="speedSlider"
             onchange="speedRnd = parseFloat(this.value)">
         </div>
       </div>
@@ -175,7 +175,7 @@
     <div class="low-bar">
 
       <div class="checkbox">
-        <input type="checkbox" id="accensione" onclick="ONOFF()">
+        <input type="checkbox" id="accensione" >
         <div class="slider">
           <div class="slide">
             <span>OFF</span>
@@ -205,22 +205,21 @@
       <legend style="color: white; font-family:Helvetica, sans-serif;"><strong>FILTERS</strong> </legend>
 
       <div class="SLDdown"><input type="range" class="sliderdown" id="LOWFilter" min="0.001" max="0.5" value="0.5"
-          step="0.0001" onchange="LOWfilterSliderFreq = parseFloat(this.value)"></div><span
+          step="0.0001"></div><span
         style="color: white;">LOW-PASS</span>
 
       <div class="SLDdown"><input type="range" class="sliderdown" id="HIGHFilter" min="0.001" max="0.5" value="0.001"
-          step="0.0001" onchange="HIGHfilterSliderFreq = parseFloat(this.value)"></div><span
+          step="0.0001"></div><span
         style="color: white;">HIGH-PASS </span>
     </fieldset>
 
     <fieldset id="Echos" style="border: 3px double white; height: 14vh">
       <legend style="color: white; font-family:Helvetica, sans-serif;"><strong>ECHO</strong> </legend>
 
-      <div class="SLDdown"><input type="range" class="sliderdown" id="TimeOfDelay" min="0" max="1" value="0" step="0.01"
-          onchange="TimeDelay = parseFloat(this.value)"></div><span style="color: white;">DELAY </span>
+      <div class="SLDdown"><input type="range" class="sliderdown" id="TimeOfDelay" min="0" max="1" value="0" step="0.01"></div><span style="color: white;">DELAY </span>
 
-      <div class="SLDdown"><input type="range" class="sliderdown" id="GainOfDelay" min="0" max="0.8" value="0" step="0.1"
-          onchange="GainDelay = parseFloat(this.value)"></div>
+      <div class="SLDdown"><input type="range" class="sliderdown" id="GainOfDelay" min="0" max="0.8" value="0"
+          step="0.1"></div>
       <span style="color: white;">GAIN</span>
     </fieldset>
 
@@ -239,7 +238,8 @@
       </select>
     </div>
   </div>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
 </body>
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
+
 </html>
