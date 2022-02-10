@@ -52,7 +52,7 @@ On the left, there is a waveshape selector, where you can choose the shape of yo
 
 On the right side there is the envelopes secition, where you can set the attack, sustain, decay, release and the main gain of the notes. There is also a canvas where you can directly visualize the final result.
 
-![image](https://user-images.githubusercontent.com/99413338/153434499-99150d40-ad9f-4aa1-ac74-d2400fe789fc.png)
+![image](https://user-images.githubusercontent.com/99413338/153465328-3a4dde02-4fa7-4e36-9923-ade36f92f57a.png)
 
 On the upper section there is a canvas where you can see the final wave emitted by the synth. 
 
