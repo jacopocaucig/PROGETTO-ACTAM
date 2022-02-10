@@ -8,7 +8,7 @@ The main goal of our project is to implement a multifunctional system wich is ab
 ## Sections
 Our system is carachterised by three main sections:
 
-### Recorder
+## Recorder
 This allows the executor to record his voice or an instrument through the mic input. ![image](https://user-images.githubusercontent.com/99413338/153432794-0ae2fb83-6d11-425a-a3ce-8d7c38b9004a.png)
 
 Starting from the lower buttons, the ON/OFF  switcher activate the recorder, and the REC button allows you to start and stop the recording whenever you want.
@@ -32,7 +32,7 @@ On the upper section, there is a granular tool where, pressing the RND button an
     Fig.1 : selected section and random function OFF                                
     Fig.2 : selected section and random function ON
     
-### Synth
+## Synth
 In this section a polyphonic synth is implemented. ù
 
 ![image](https://user-images.githubusercontent.com/99413338/153433946-6680e371-ef86-44f2-8f79-8143e36688e5.png)
@@ -59,7 +59,7 @@ On the upper section there is a canvas where you can see the final wave emitted 
 ![image](https://user-images.githubusercontent.com/99413338/153434588-c0cf5a3d-7dad-4618-85b8-952ba4181a8c.png)
 
 
-### Effect Rack
+## Effect Rack
 
 ![image](https://user-images.githubusercontent.com/99413338/153434708-3bf57136-1232-46c8-80e1-a008fd583f21.png)
 
