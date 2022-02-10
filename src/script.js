@@ -42,11 +42,11 @@ function upload() {
   NewPreset.Decay = document.querySelector("#sustainRange").value;
   NewPreset.Release = document.querySelector("#releaseRange").value;
   NewPreset.Gain = document.querySelector("#gainRange").value;
-  NewPreset.LowPass = LOWfilterSliderFreq;
-  NewPreset.HighPass = HIGHfilterSliderFreq;
-  NewPreset.EchoDelay = TimeDelay;
-  NewPreset.EchoGain = GainDelay;
-  NewPreset.FreqDifference = FreqDifference;
+  NewPreset.LowPass = document.querySelector("#LOWFilter").value;
+  NewPreset.HighPass = document.querySelector("#HIGHFilter").value;
+  NewPreset.EchoDelay = document.querySelector("#TimeOfDelay").value;
+  NewPreset.EchoGain = document.querySelector("#GainOfDelay").value;
+  NewPreset.FreqDifference = document.querySelector("#deltaSlider").value;
   db.collection("presets").add(NewPreset)
   .then(function (docRef) {
     docRef.get().then(function (snap) {
