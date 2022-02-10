@@ -37,6 +37,7 @@ function dbCallback(snapshot) {
 
 function upload() {
   let NewPreset = {};
+  NewPreset.Name = NamePreset;
   NewPreset.Attack = document.querySelector("#attackRange").value;
   NewPreset.Sustain = document.querySelector("#decayRange").value;
   NewPreset.Decay = document.querySelector("#sustainRange").value;
@@ -632,8 +633,8 @@ function playNote(nFreq, isOnFlag) {
 };
 
 
-var  delaystime = document.querySelector("#TimeOfDelay");
-var  delaysgain = document.querySelector("#GainOfDelay");
+var delaystime = document.querySelector("#TimeOfDelay");
+var delaysgain = document.querySelector("#GainOfDelay");
 
 TimeOfDelay.addEventListener("change", SETTADELAY)
 GainOfDelay.addEventListener("change", SETTADELAY)
@@ -643,8 +644,8 @@ function SETTADELAY() {
   GainDelay = delaysgain.value;
 }
 
-var  passabasso = document.querySelector("#LOWFilter");
-var  passaalto = document.querySelector("#HIGHFilter");
+var passabasso = document.querySelector("#LOWFilter");
+var passaalto = document.querySelector("#HIGHFilter");
 
 TimeOfDelay.addEventListener("change", SETTAFILTRI)
 GainOfDelay.addEventListener("change", SETTAFILTRI)
@@ -904,3 +905,18 @@ var MINUS = document.getElementById("-");
 
 PLUS.addEventListener("click", plusPitch)
 MINUS.addEventListener("click", minusPitch)
+
+
+var SAVEPreset = document.getElementById("save")
+SAVEPreset.addEventListener("click", SaveButtonClicked)
+
+var NamePreset = new String("");
+
+function NomePreset() {
+  NamePreset = prompt("Please enter the preset's name:");
+}
+
+function SaveButtonClicked() {
+  NomePreset();
+  upload();
+}

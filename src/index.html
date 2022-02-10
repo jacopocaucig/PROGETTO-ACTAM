@@ -130,8 +130,8 @@
 
           </div>
           <div class="octaveSelection">
-            <button id="-"  class="minusPitch"><span style="color:lightgrey">-</span></button>
-            <button id="+"  class="plusPitch"><span style="color:lightgrey">+</span></button>
+            <button id="-" class="minusPitch"><span style="color:lightgrey">-</span></button>
+            <button id="+" class="plusPitch"><span style="color:lightgrey">+</span></button>
           </div>
           <div class="buttons">
             <button id="turnoff-button">On/Off</button>
@@ -175,7 +175,7 @@
     <div class="low-bar">
 
       <div class="checkbox">
-        <input type="checkbox" id="accensione" >
+        <input type="checkbox" id="accensione">
         <div class="slider">
           <div class="slide">
             <span>OFF</span>
@@ -205,18 +205,17 @@
       <legend style="color: white; font-family:Helvetica, sans-serif;"><strong>FILTERS</strong> </legend>
 
       <div class="SLDdown"><input type="range" class="sliderdown" id="LOWFilter" min="0.001" max="0.5" value="0.5"
-          step="0.0001"></div><span
-        style="color: white;">LOW-PASS</span>
+          step="0.0001"></div><span style="color: white;">LOW-PASS</span>
 
       <div class="SLDdown"><input type="range" class="sliderdown" id="HIGHFilter" min="0.001" max="0.5" value="0.001"
-          step="0.0001"></div><span
-        style="color: white;">HIGH-PASS </span>
+          step="0.0001"></div><span style="color: white;">HIGH-PASS </span>
     </fieldset>
 
     <fieldset id="Echos" style="border: 3px double white; height: 14vh">
       <legend style="color: white; font-family:Helvetica, sans-serif;"><strong>ECHO</strong> </legend>
 
-      <div class="SLDdown"><input type="range" class="sliderdown" id="TimeOfDelay" min="0" max="1" value="0" step="0.01"></div><span style="color: white;">DELAY </span>
+      <div class="SLDdown"><input type="range" class="sliderdown" id="TimeOfDelay" min="0" max="1" value="0"
+          step="0.01"></div><span style="color: white;">DELAY </span>
 
       <div class="SLDdown"><input type="range" class="sliderdown" id="GainOfDelay" min="0" max="0.8" value="0"
           step="0.1"></div>
@@ -231,12 +230,25 @@
       <span style="color: white;" id="deltaValue"></span>
     </fieldset>
 
-    <div class="custom-select" style="width:200px;">
-      <select>
-        <option value="0">Select preset:</option>
-        <option value="1">preset1</option>
-      </select>
+    <div class="PresetSaveSelect">
+      <div class="custom-select" style="width:200px;">
+        <select>
+          <option value="0">Select preset:</option>
+          <option value="1">preset1</option>
+          <option value="2">preset2</option>
+          <option value="3">preset3</option>
+          <option value="4">preset4</option>
+          <option value="5">preset5</option>
+        </select>
+      </div>
+      <button id="save" style="width:70px">
+        <div class="label labelSave"> SAVE </div>
+      </button>
+      <button id="download" style="width:70px">
+        <div class="label labelDownload"> SELECT </div>
+      </button>
     </div>
+
   </div>
   <script src="script.js"></script>
   <link rel="stylesheet" href="style.css">
