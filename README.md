@@ -70,6 +70,19 @@ There is also a window on the left where you can select some presets for the eve
 
 
 
+## Some functions 
+
+### Random
+
+First of all we defined a function setIntervalX, that can call a function for a certain number of time ("repetirions" input) after a delay
+Then we implemented the PlayRandom function: we compare the length of the selected section(in seconds) with the updating random speed. In the case that the section is longer, the function plays a shorter section with duration equal to the random speed. On the other hand, if the section is shorter, the function plays the section X times, where X = DecNumber + IntNumber.
+
+![image](https://user-images.githubusercontent.com/99413338/153580590-40913452-f748-4e76-a212-1667e7577f56.png)
+
+In order to update the random sections, we implemented the updateRandom function: we set a random value for the start of the section, and then we set the end at the same distance of the main section's length (choosed with the two knobs of the recorder). The CheckOutOfBonds function allows us to check that the random bounds do not exceed the canvas size.
+
+![image](https://user-images.githubusercontent.com/99413338/153580200-3d2fbe34-a256-488b-a466-9f7765dd07e6.png)
+
 
 
 
