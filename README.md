@@ -79,7 +79,7 @@ Then we implemented the PlayRandom function: we compare the length of the select
 
 ![image](https://user-images.githubusercontent.com/99413338/153580590-40913452-f748-4e76-a212-1667e7577f56.png)
 
-In order to update the random sections, we implemented the updateRandom function: we set a random value for the start of the section, and then we set the end at the same distance of the main section's length (choosed with the two knobs of the recorder). The CheckOutOfBonds function allows us to check that the random bounds do not exceed the canvas size.
+In order to update the random sections, we implemented the updateRandom function: we set a random value for the start of the section, and then we set the end at the same distance of the main section's length (choosed with the two knobs of the recorder). The CheckOutOfBondsRandom function allows us to check that the random bounds do not exceed the canvas size.
 
 ![image](https://user-images.githubusercontent.com/99413338/153580200-3d2fbe34-a256-488b-a466-9f7765dd07e6.png)
 
