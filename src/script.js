@@ -18,8 +18,10 @@ const firebaseConfig = {
   appId: "1:934505841889:web:49c57ffed9d1f0f5ad23a0"
 };
 
-var preset;
-window.preset = preset;
+var numeroPreset= 0;
+var preset = [];
+
+
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -27,13 +29,27 @@ const db = firebase.firestore();
 db.collection("presets").onSnapshot(dbCallback);
 
 function dbCallback(snapshot) {
-  preset = [];
   snapshot.docs.forEach((doc) => preset.push({
     id: doc.id,
     ...doc.data(),
   }));
   console.log(preset)
+  
 }
+numeroPreset=preset.length
+
+window.preset = preset;
+window.numeroPreset = numeroPreset;
+
+const opt = document.createElement("option");
+
+function creaOpzioni() {
+  for (var i=0; i<= preset.length; i++) {
+    opt.setAttribute(preset[i].Name,i);
+  }
+}
+
+window.opt = opt;
 
 function upload() {
   let NewPreset = {};
